@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Block Ops Bodycam</title>
+  </head>
+  <body>
+    <div id="game"></div>
+
+    <div id="menu" class="overlay">
+      <div class="panel wide">
+        <h1>BLOCK OPS</h1>
+        <p class="subtitle">Closed school training facility • tactical bodycam FPS prototype</p>
+
+        <div class="menuGrid">
+          <label>
+            Loadout
+            <select id="loadoutSelect">
+              <option value="rifle">M4 Rifle</option>
+              <option value="smg">Compact SMG</option>
+              <option value="shotgun">Pump Shotgun</option>
+              <option value="pistol">Service Pistol</option>
+              <option value="sniper">Marksman Rifle</option>
+            </select>
+          </label>
+
+          <label>
+            Gore Effects
+            <select id="goreSelect">
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="off">Off</option>
+            </select>
+          </label>
+
+          <label class="checkLabel">
+            <input id="helmetCamStart" type="checkbox" checked />
+            Start with helmet cam
+          </label>
+        </div>
+
+        <button id="playBtn">DEPLOY</button>
+        <p class="small">WASD move • Mouse look • Left click shoot • Right click aim • R reload • 1-5 weapons • H helmet cam • P pause</p>
+      </div>
+    </div>
+
+    <div id="pauseMenu" class="overlay hidden">
+      <div class="panel">
+        <h2>PAUSED</h2>
+        <label>
+          Gore Effects
+          <select id="pauseGoreSelect">
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="off">Off</option>
+          </select>
+        </label>
+        <button id="resumeBtn">RESUME</button>
+        <button id="backMenuBtn" class="secondary">BACK TO MENU</button>
+      </div>
+    </div>
+
+    <div id="hud">
+      <div id="topHud">
+        <span id="weaponName">M4 Rifle</span>
+        <span id="modeText">HELMET CAM ON</span>
+        <span id="enemyText">HOSTILES 0</span>
+      </div>
+
+      <div id="crosshair"></div>
+      <div id="redDot"></div>
+      <div id="message"></div>
+
+      <div id="bottomLeft">
+        <div>HEALTH</div>
+        <div class="bar"><div id="healthBar"></div></div>
+        <div id="injuryText">NO INJURY</div>
+      </div>
+
+      <div id="bottomRight">
+        <div id="ammoText">FULL</div>
+        <div id="statusText"></div>
+      </div>
+    </div>
+
+    <div id="deathScreen" class="hidden">
+      <div class="signalLost">SIGNAL LOST</div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

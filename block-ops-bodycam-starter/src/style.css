@@ -1,0 +1,217 @@
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #101315;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  user-select: none;
+}
+
+#game,
+canvas {
+  position: fixed;
+  inset: 0;
+  display: block;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at center, rgba(255,255,255,.1), transparent 32%),
+    linear-gradient(180deg, rgba(73, 116, 140, .85), rgba(15, 24, 19, .97));
+}
+
+.hidden { display: none !important; }
+
+.panel {
+  width: min(560px, 92vw);
+  padding: 30px;
+  text-align: center;
+  border-radius: 22px;
+  background: rgba(5, 8, 12, .9);
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 25px 80px rgba(0,0,0,.55);
+  backdrop-filter: blur(10px);
+}
+
+.panel.wide { width: min(760px, 92vw); }
+.panel h1 { margin: 0; font-size: 70px; letter-spacing: -4px; }
+.panel h2 { margin: 0 0 18px; font-size: 44px; }
+.subtitle { color: rgba(255,255,255,.72); font-size: 17px; }
+.small { color: rgba(255,255,255,.58); font-size: 13px; }
+
+.menuGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 20px 0;
+}
+
+label {
+  display: grid;
+  gap: 7px;
+  text-align: left;
+  color: rgba(255,255,255,.75);
+  font-weight: 800;
+}
+
+select {
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 12px;
+  padding: 12px;
+  color: white;
+  background: rgba(255,255,255,.1);
+  font-weight: 900;
+}
+
+.checkLabel {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.checkLabel input { width: 18px; height: 18px; }
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 999px;
+  padding: 15px 34px;
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #2c71ff, #8d4dff);
+  box-shadow: 0 13px 34px rgba(80, 115, 255, .38);
+  margin: 8px;
+}
+
+button.secondary { background: rgba(255,255,255,.14); box-shadow: none; }
+
+#hud {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: none;
+  pointer-events: none;
+}
+
+#topHud {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 18px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.42);
+  border: 1px solid rgba(255,255,255,.14);
+  font-size: 13px;
+  font-weight: 900;
+  backdrop-filter: blur(7px);
+}
+
+#crosshair {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 8px white;
+}
+
+#redDot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #ff2020;
+  box-shadow: 0 0 8px #ff2020, 0 0 18px #ff2020;
+  opacity: 0;
+}
+
+#message {
+  position: absolute;
+  top: 26%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 26px;
+  font-weight: 900;
+  text-shadow: 0 4px 14px black;
+  opacity: 0;
+  transition: opacity .16s;
+}
+
+#bottomLeft,
+#bottomRight {
+  position: absolute;
+  bottom: 18px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(0,0,0,.43);
+  border: 1px solid rgba(255,255,255,.14);
+  font-weight: 900;
+  backdrop-filter: blur(7px);
+}
+
+#bottomLeft { left: 18px; width: 245px; }
+#bottomRight { right: 18px; min-width: 160px; text-align: right; }
+
+.bar {
+  width: 100%;
+  height: 18px;
+  margin: 8px 0;
+  border-radius: 999px;
+  background: rgba(255,255,255,.18);
+  overflow: hidden;
+}
+
+#healthBar {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff3131, #ffc247);
+}
+
+#injuryText,
+#statusText { color: #ffe26a; font-size: 12px; min-height: 16px; }
+#ammoText { font-size: 34px; letter-spacing: 1px; }
+
+#deathScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  background: black;
+}
+
+.signalLost {
+  font-size: 44px;
+  font-weight: 900;
+  letter-spacing: 5px;
+  color: #ff3131;
+  text-shadow: 0 0 18px #ff0000;
+  opacity: 0;
+  animation: popIn .4s ease forwards .35s;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(.96); }
+  to { opacity: 1; transform: scale(1); }
+}
